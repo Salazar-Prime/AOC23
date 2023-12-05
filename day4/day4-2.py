@@ -1,9 +1,10 @@
-import re
+import re, math
 
-data = list(open("inputs/day4-1.txt"))
+data = list(open("day4-1.txt"))
 data = [x.strip().split(": ") for x in data]
 
 cardSum = 0
+scoreBoard = [1 for _ in range(len(data))]
 
 for idx, card in enumerate(data):
     # get card number card <card number> with regex
@@ -16,4 +17,7 @@ for idx, card in enumerate(data):
     if matches > 0:
         cardSum += 2 ** (matches - 1)
 
-print(cardSum)
+    for i in range(matches):
+        scoreBoard[idx + i + 1] += scoreBoard[idx]
+
+print(sum(scoreBoard))

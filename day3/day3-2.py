@@ -4,7 +4,7 @@ from math import *
 # 140 x 140 grid
 # Sample line text: .......153..988....502..842......
 
-board = list(open("inputs/day3-1.txt"))
+board = list(open("day3-1.txt"))
 # get location of all characters
 charLocs = {
     (r, c): []

@@ -16,7 +16,7 @@ def colorCount(set, color):
 
 
 # read file and parse line by line
-with open("inputs/day2-1.txt") as f:
+with open("day2-1.txt") as f:
     sum = 0
 
     for line in f:

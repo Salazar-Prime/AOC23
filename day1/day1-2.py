@@ -5,7 +5,7 @@ import re
 namesDigits = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 sum = 0
 # open file
-with open("inputs/day1-1.txt") as f:
+with open("day1-1.txt") as f:
     # read file line by line
     for line in f:
         # remove newline character

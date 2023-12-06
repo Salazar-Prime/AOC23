@@ -1,5 +1,5 @@
 import os, re
-from utils import *
+from localUtils import *
 
 test = False
 currentDay = 5
@@ -24,13 +24,6 @@ maps = [
     getMap(data, "humidity-to-location map:"),
 ]
 
-# destination, source, count
-# time the code 
-import time
-start = time.time()
-minLocation = findInMaps4SeedRangeSerial(maps, seeds, first=True)
-print("complete serial in ", time.time() - start)
-start = time.time()
-minLocation = findInMaps4SeedRangeParallel(maps, seeds, first=True)
-print("complete serial in ", time.time() - start)
-# print(minLocation)
+seeds = convertStrCount2StrEnd(seeds)
+
+print("Min Location: ", getMinSeedLocation(maps, seeds))

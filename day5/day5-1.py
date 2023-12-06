@@ -1,5 +1,5 @@
 import os, re
-from utils import *
+from localUtils import *
 
 test = False
 currentDay = 5

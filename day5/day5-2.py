@@ -25,5 +25,12 @@ maps = [
 ]
 
 # destination, source, count
-minLocation = findInMaps4SeedRange(maps, seeds)
-print(minLocation)
+# time the code 
+import time
+start = time.time()
+minLocation = findInMaps4SeedRangeSerial(maps, seeds, first=True)
+print("complete serial in ", time.time() - start)
+start = time.time()
+minLocation = findInMaps4SeedRangeParallel(maps, seeds, first=True)
+print("complete serial in ", time.time() - start)
+# print(minLocation)

@@ -25,7 +25,7 @@ open(newDay + "/" + newDay + "-2.py", "w+").write(template)
 
 # get input from AOC website
 from aoc import aoc
-temp = aoc.get_input(5)
+temp = aoc.get_input(int(maxDay) + 1)
 os.rename("data/2023" + "_" + str(int(maxDay) + 1) + ".txt", newDay + "/" + newDay + "-1.txt")
 
 # delete all files in data folder and then delete data folder

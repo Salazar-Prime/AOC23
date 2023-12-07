@@ -6,7 +6,7 @@ from utils import *
 
 
 test = False
-currentDay = 6
+currentDay = 1
 if test:
     data = list(open(f"day{currentDay}/test.txt"))
 else:

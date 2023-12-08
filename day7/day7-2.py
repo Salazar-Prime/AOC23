@@ -14,13 +14,14 @@ if test:
 else:
     data = list(open(f"day{currentDay}/day{currentDay}-1.txt"))
 ##### END BOIER CODE #####
+
 hands = {}
 for line in data:
     # add new row to hands df
     line = line.strip().split(" ")
     hands[line[0]] = line[1]
-
 hands = pd.DataFrame(hands.items(), columns=["cards", "amount"])
+
 # create a new column cards-J where J is replaced with ""
 hands["cards-J"] = hands["cards"].apply(lambda x: x.replace("J", ""))
 
@@ -34,8 +35,7 @@ hands["x-kind"] = hands.apply(
     lambda row: Counter(row["cards-J"]).most_common(1)[0][1], axis=1
 )
 
-# go through x-rank 2 group and check for 2- pair case
-# if 2-pair case, set x-kind to 2.5
+# 2-pair and full house 
 for i in range(len(hands["x-kind"])):
     try:
         secondHighest = Counter(hands["cards-J"][i]).most_common(2)[1][1]
@@ -52,6 +52,7 @@ for i in range(len(hands["x-kind"])):
 # count number of J's in each row
 hands["J-count"] = hands["cards"].apply(lambda x: x.count("J"))
 
+# MATHS !!!!
 hands.loc[(hands["J-count"] == 4) & (hands["x-kind"] == 1), "x-kind"] = 5
 hands.loc[(hands["J-count"] == 3) & (hands["x-kind"] == 2), "x-kind"] = 5
 hands.loc[(hands["J-count"] == 3) & (hands["x-kind"] == 1), "x-kind"] = 4
@@ -63,9 +64,6 @@ hands.loc[(hands["J-count"] == 1) & (hands["x-kind"] == 3), "x-kind"] = 4
 hands.loc[(hands["J-count"] == 1) & (hands["x-kind"] == 2.5), "x-kind"] = 3.5
 hands.loc[(hands["J-count"] == 1) & (hands["x-kind"] == 2), "x-kind"] = 3
 hands.loc[(hands["J-count"] == 1) & (hands["x-kind"] == 1), "x-kind"] = 2
-
-# set WWWWW to JJJJJ
-# hands.loc[(hands["cards-J"] == "WWWWW"), "cards-J"] = "JJJJJ"
 
 # split cards into 5 columns card1, card2, card3, card4, card5
 hands[["card1", "card2", "card3", "card4", "card5"]] = hands["cards"].apply(

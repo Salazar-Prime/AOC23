@@ -2,6 +2,10 @@
 
 Giving AOC a try :p
 
+# Missing attempt
+
+- Day 10 - Part 2
+
 # Code Inspiration
 
 - Day 3 - AOC subreddit megathread

@@ -19,7 +19,7 @@ dataCopy = data.copy()
 #### MAPPPING ####
 # fmt: off
 symbolMap = { "|": (1,0,1,0), "-": (0,1,0,1), "L": (1,1,0,0), "7": (0,0,1,1), "J": (1,0,0,1), "F": (0,1,1,0), "Z": (1,1,1,1)  }
-gotoPos ={"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
+deltaPos ={"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0)}
 nextDirMap = {"N": "S", "S": "N", "E": "W", "W": "E"}
 directions = ["N", "E", "S", "W"]
 # fmt: on
@@ -33,27 +33,32 @@ for y, line in enumerate(data):
         data[y] = line[:x] + "Z" + line[x + 1 :]
         break
 # found "S"
-pos = (x, y)
+currentPos = (x, y)
 
 # find the start direction and enter NN
 for dir in directions:
-    nd = nextDirMap[dir]
+    nextDirection = nextDirMap[dir]
     #  elementwise
-    newPos = addT(pos, gotoPos[nd], dataCopy)
-    if checkDir(newPos, nd, symbolMap, directions, data):
-        pos = newPos
-        nd = getNextNode(pos, nd)
+    newPos = addT(currentPos, deltaPos[dir], dataCopy)
+    if checkDir(newPos, nextDirection, symbolMap, directions, data):
+        currentPos = newPos
+        nextDirection = getNextNode(
+            currentPos, nextDirection, symbolMap, directions, data
+        )
         break
 
 count = 0
 # start walking
 while True:
-    symbol = data[pos[1]][pos[0]]
+    symbol = data[currentPos[1]][currentPos[0]]
     if symbol == "Z":
         break
     count += 1
 
-    pos = addT(pos, gotoPos[nd], dataCopy)
-    nd = getNextNode(pos, nextDirMap[nd], symbolMap, directions, data)
+    currentPos = addT(currentPos, deltaPos[nextDirection], dataCopy)
+    nextDirection = getNextNode(
+        currentPos, nextDirMap[nextDirection], symbolMap, directions, data
+    )
 
 print(count)
+print((count + 1) / 2)

@@ -1,19 +1,22 @@
 def visMap(data, pos):
-    dataCopy = data.copy()
+    # check if the end is reached
+    if data[pos[1]][pos[0]] == "S":
+        return
     # replace chacrter in dataCopy at tp with "O"
-    dataCopy[pos[1]] = dataCopy[pos[1]][: pos[0]] + "O" + dataCopy[pos[1]][pos[0] + 1 :]
+    data[pos[1]] = data[pos[1]][: pos[0]] + "O" + data[pos[1]][pos[0] + 1 :]
     # replace symvols oin dataCopy following zip
     translation_table = str.maketrans("|JL7F-", "│┘└┐┌─")
     # apply tranlastion table
-    dataCopy = [line.translate(translation_table) for line in dataCopy]
+    data = [line.translate(translation_table) for line in data]
     # save it to newMap.txt
     with open("newMap.txt", "w") as f:
-        f.write("".join(dataCopy))
+        f.write("".join(data))
 
 
-def addT(t1, t2, dataCopy):
+def addT(t1, t2, dataCopy=None):
     tp = tuple(map(sum, zip(t1, t2)))
-    visMap(dataCopy, tp)
+    if dataCopy is not None:
+        visMap(dataCopy, tp)
     return tp
 
 
@@ -37,3 +40,7 @@ def getNextNode(pos, entryDir, symbolMap, directions, data):
     ones.remove(directions.index(entryDir))
     # remove index directions[entryDir]
     return directions[ones[0]]
+
+
+def replaceChar(string, char, index):
+    return string[:index] + char + string[index + 1 :]

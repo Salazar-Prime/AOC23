@@ -22,6 +22,8 @@ template = template.replace("currentDay = 1", "currentDay = " + str(int(maxDay) 
 # write template to day{newDay}-1.py
 open(newDay + "/" + newDay + "-1.py", "w+").write(template)
 open(newDay + "/" + newDay + "-2.py", "w+").write(template)
+# create an empty localUtils.py file
+open(newDay + "/localUtils.py", "w+").write("")
 
 # get input from AOC website
 from aoc import aoc

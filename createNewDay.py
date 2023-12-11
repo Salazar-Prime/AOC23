@@ -4,9 +4,9 @@ import os, re, shutil
 from aoc import aoc
 
 # get list of all folders in current directory that start with day
-folders = filter(lambda a: a.startswith("day"), os.listdir("."))
+folders = list(filter(lambda a: a.startswith("day"), os.listdir(".")))
 # get max day number
-maxDay = max(map(lambda a: re.search(r"\d+", a).group(), folders))
+maxDay = max(map(lambda a: int(re.search(r"\d+", a).group()), folders))
 
 # create new day folder
 newDay = "day" + str(int(maxDay) + 1)

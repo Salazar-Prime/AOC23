@@ -6,7 +6,6 @@ import itertools
 sys.path.insert(1, "common")
 from utils import *
 
-
 test = False
 currentDay = 12
 if test:
@@ -36,7 +35,7 @@ for idx, line in enumerate(data):
             continue
         if getHashCounts(tuple(newPattern)) == hashCounts:
             count += 1
-    # break
+
 if timeCode:
     timeTaken = time.time() - startTime
     print(f"Time taken: {timeTaken}")

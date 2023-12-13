@@ -5,6 +5,7 @@ Giving AOC a try :p
 # Missing attempt
 
 - Day 10 - Part 2
+- Day 12 - Part 2
 
 # Code Inspiration
 

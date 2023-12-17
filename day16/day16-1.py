@@ -3,12 +3,12 @@ import sys, os, re
 from localUtils import *
 import functools
 
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(20000)
 
 sys.path.insert(1, "common")
 from utils import *
 
-test = True
+test = False
 currentDay = 16
 if test:
     data = list(open(f"day{currentDay}/test.txt"))
@@ -48,19 +48,23 @@ def getChar(src):
     return grid[src[1]][src[0]]
 
 
-def outOfBounds(src):
+def outOfBounds(direction, src):
     # returns 1 if beam is outside the bounds else 0
     if src[0] < 0 or src[0] >= len(grid[0]) or src[1] < 0 or src[1] >= len(grid):
         return 1
-    updateGrid(src)
-    energizedCoordinates.add(src)
+    if test:
+        updateGrid(src)
+    # create a tuple of the current src and direction
+    energizedCoordinates.add((src, direction))
 
 
 # @functools.cache
 def beamMove(direction, src):
     # move beam. Get target
     dest = addT(src, target[direction])
-    if outOfBounds(dest):
+    if (dest, direction) in energizedCoordinates:
+        return 1
+    if outOfBounds(direction, dest):
         return 1
     destChar = getChar(dest)
 
@@ -83,6 +87,6 @@ def beamMove(direction, src):
                 beamMove(move, dest)
 
 
-if beamMove("R", (-1, 0)):
-    # get length of energizedCoordinates
-    print(len(energizedCoordinates))
+beamMove("R", (-1, 0))
+energizedCoordinates = set(coor[0] for coor in energizedCoordinates)
+print(len(energizedCoordinates))

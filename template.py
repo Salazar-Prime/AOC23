@@ -12,4 +12,10 @@ if test:
     data = list(open(f"day{currentDay}/test.txt"))
 else:
     data = list(open(f"day{currentDay}/day{currentDay}-1.txt"))
+
+# Convert to numpy array Str
+# data = convertToNumpyArrayStr(data)
+# Convert to numpy array Int
+# data = convertToNumpyArrayInt(data)
+
 ##### END BOIER CODE #####

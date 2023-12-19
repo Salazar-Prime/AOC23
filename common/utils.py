@@ -29,9 +29,20 @@ def addT(a, b):
     return tuple(sum(x) for x in zip(a, b))
 
 
-def getNumbersFromString(str):
+def getNumbersFromString(str, list=True):
     # returns a list of nubers from a string
-    return [int(s) for s in re.findall(r"-?\d+", str)]
+    if list:
+        return [int(s) for s in re.findall(r"-?\d+", str)]
+    else:
+        return int(re.findall(r"-?\d+", str)[0])
+
+
+def getHexCodeFromString(str, list=True):
+    # returns a list of nubers from a string
+    if list:
+        return re.findall(r"#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})", str)
+    else:
+        return re.findall(r"#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})", str)[0]
 
 
 # fmt: off

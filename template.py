@@ -17,5 +17,7 @@ else:
 # data = convertToNumpyArrayStr(data)
 # Convert to numpy array Int
 # data = convertToNumpyArrayInt(data)
+# create a grid dicitonary od data with coordinates as keys and data as values
+# grid, gridW, gridH = gridify(data, int)
 
 ##### END BOIER CODE #####

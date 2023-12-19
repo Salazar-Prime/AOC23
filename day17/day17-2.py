@@ -18,10 +18,9 @@ else:
 # data = convertToNumpyArrayStr(data)
 # Convert to numpy array Int
 # data = convertToNumpyArrayInt(data)
+# create a grid dicitonary od data with coordinates as keys and data as values
+grid, gridW, gridH = gridify(data, int)
 
-grid = {(x, y): int(c) for y, r in enumerate(data) for x, c in enumerate(r.strip("\n"))}
-gridW = max(x for x, y in grid.keys()) + 1
-gridH = max(y for x, y in grid.keys()) + 1
 
 ##### END BOIER CODE #####
 # EG: getGridNeighbors(grid, (0, 0))

@@ -34,14 +34,24 @@ def getNumbersFromString(str):
     return [int(s) for s in re.findall(r"-?\d+", str)]
 
 
-def convertToNumpyArrayStr(data, removeNewLine=True):
+# fmt: off
+def gridify(data, dtype = str ):
+    if dtype == int:
+        grid = {(x, y): int(c) for y, r in enumerate(data) for x, c in enumerate(r.strip("\n"))}
+    elif dtype == str:
+        grid = {(x, y): c for y, r in enumerate(data) for x, c in enumerate(r.strip("\n"))}
+    gridW = max(x for x, y in grid.keys()) + 1
+    gridH = max(y for x, y in grid.keys()) + 1
+    return grid, gridW, gridH
+
+def convertToNumpyArray(data, removeNewLine=True, dtype=str):
     # get length of each row and total number of rows
     totalRows = len(data)
     totalCols = len(data[0])
     if removeNewLine:
         totalCols -= 1
     # create numpy array
-    arr = np.zeros((totalRows, totalCols), dtype=str)
+    arr = np.zeros((totalRows, totalCols), dtype=dtype)
     # populate numpy array
     for idx, row in enumerate(data):
         for jdx, char in enumerate(row):
@@ -49,24 +59,6 @@ def convertToNumpyArrayStr(data, removeNewLine=True):
                 continue
             arr[idx][jdx] = char
     return arr
-
-
-def convertToNumpyArrayInt(data, removeNewLine=True):
-    # get length of each row and total number of rows
-    totalRows = len(data)
-    totalCols = len(data[0])
-    if removeNewLine:
-        totalCols -= 1
-    # create numpy array
-    arr = np.zeros((totalRows, totalCols), dtype=int)
-    # populate numpy array
-    for idx, row in enumerate(data):
-        for jdx, char in enumerate(row):
-            if removeNewLine and char == "\n":
-                continue
-            arr[idx][jdx] = char
-    return arr
-
 
 def saveToFile(data, saveName, newLine=True):
     # save to file
@@ -76,3 +68,9 @@ def saveToFile(data, saveName, newLine=True):
                 f.write(line + "\n")
             else:
                 f.write(line + "")
+
+# Legacy code
+def convertToNumpyArrayInt(data, removeNewLine=True):
+    return convertToNumpyArray(data, removeNewLine, int)
+def convertToNumpyArrayStr(data, removeNewLine=True):
+    return convertToNumpyArray(data, removeNewLine, str)
